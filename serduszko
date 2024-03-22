@@ -1,0 +1,19 @@
+grid = [
+    ['.', '.', '.', '.', '.', '.'],
+    ['.', '0', '0', '.', '.', '.'],
+    ['0', '0', '0', '0', '.', '.'],
+    ['0', '0', '0', '0', '0', '.'],
+    ['.', '0', '0', '0', '0', '0'],
+    ['0', '0', '0', '0', '0', '.'],
+    ['0', '0', '0', '0', '.', '.'],
+    ['.', '0', '0', '.', '.', '.'],
+    ['.', '.', '.', '.', '.', '.']
+]
+# The outer loop goes through each column index.
+for i in range(len(grid[0])):
+    # The inner loop goes through each row.
+    for j in range(len(grid)):
+        # Print the character without a newline.
+        print(grid[j][i], end='')
+    # After each column, print a newline character.
+    print()
