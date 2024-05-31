@@ -1,0 +1,52 @@
+def isValidChessBoard(board):
+    piece_counts = {
+        'bking': 0,
+        'wking': 0,
+        'bpawn': 0,
+        'wpawn': 0
+    }
+    valid_positions = [f'{r}{c}' for r in range(1, 9) for c in 'abcdefgh']
+    valid_pieces = {'pawn', 'knight', 'bishop', 'rook', 'queen', 'king'}
+    piece_count = {'w': 0, 'b': 0}
+    
+    for position, piece in board.items():
+        # Check if the position is valid
+        if position not in valid_positions:
+            return False
+        
+        # Check if the piece name is valid
+        if len(piece) < 5 or piece[0] not in 'wb' or piece[1:] not in valid_pieces:
+            return False
+        
+        # Count pieces
+        color = piece[0]
+        piece_name = piece[1:]
+        piece_count[color] += 1
+        
+        # Count kings and pawns
+        if piece == 'bking':
+            piece_counts['bking'] += 1
+        elif piece == 'wking':
+            piece_counts['wking'] += 1
+        elif piece == 'bpawn':
+            piece_counts['bpawn'] += 1
+        elif piece == 'wpawn':
+            piece_counts['wpawn'] += 1
+    
+    # Check for exactly one black king and one white king
+    if piece_counts['bking'] != 1 or piece_counts['wking'] != 1:
+        return False
+    
+    # Each player can have at most 16 pieces
+    if piece_count['w'] > 16 or piece_count['b'] > 16:
+        return False
+    
+    # Each player can have at most 8 pawns
+    if piece_counts['bpawn'] > 8 or piece_counts['wpawn'] > 8:
+        return False
+    
+    return True
+
+# Test the function with an example
+board = {'1h': 'bking', '6c': 'wqueen', '2g': 'bbishop', '5h': 'bqueen', '3e': 'wking'}
+print(isValidChessBoard(board))  # Should return True for this example
